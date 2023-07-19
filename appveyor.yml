@@ -1,0 +1,29 @@
+version: 2.1.0.{build}
+
+install:
+    - git submodule update --init --recursive
+
+environment:
+  matrix:
+    - PRJ_GEN: "Visual Studio 14 2015"
+      BDIR: msvc2015
+      PRJ_CFG: Release
+      PARAMS: ''
+    - PRJ_GEN: "Visual Studio 15 2017"
+      APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
+      BDIR: msvc2017
+      PRJ_CFG: Release
+    - PRJ_GEN: "Visual Studio 16 2019"
+      APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2019"
+      BDIR: msvc2017
+      PRJ_CFG: Release
+
+build_script:
+  - mkdir build.%BDIR%
+  - cd build.%BDIR%
+  - cmake .. -G "%PRJ_GEN%" -A x64 "-DCMAKE_BUILD_TYPE=%PRJ_CFG%" %PARAMS%
+  - cmake --build . --config "%PRJ_CFG%" --clean-first
+
+test_script:
+    - ctest -V --output-on-failure -C %PRJ_CFG%
+
