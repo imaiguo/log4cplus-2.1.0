@@ -61,3 +61,6 @@ docs/webpage_docs-*/
 *.exe
 *.out
 *.app
+
+*.ilk
+*.pdb
