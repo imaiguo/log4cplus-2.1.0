@@ -13,28 +13,32 @@
 #include <string>
 #include <locale>
 #include <codecvt>
+
+#ifdef __MINGW64__
+#include <experimental/filesystem>
+#else
 #include <filesystem>
- 
-using namespace std;
-using namespace log4cplus;
-using namespace log4cplus::helpers;
+#endif
 
 int random(){
     return 2;
 }
 
 //convert string to wstring
-inline std::wstring to_wide_string(const std::string& input)
-{
-	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-	return converter.from_bytes(input);
-}
+// inline std::wstring to_wide_string(const std::string& input)
+// {
+// 	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+// 	return converter.from_bytes(input);
+// }
 
-log4cplus::tstring getBinPath(string strPath) {
+// LOG4CPLUS_STRING_TO_TSTRING
+// LOG4CPLUS_TEXT
+
+log4cplus::tstring getBinPath(std::string strPath) {
     size_t pos = strPath.find_last_of("\\");
-    string newpath = strPath.substr(0, pos+1);
-    log4cplus::tstring tPath = to_wide_string( newpath + "log4cplus.properties" );
-    wcout << "current config -> " << tPath <<endl;
+    std::string newpath = strPath.substr(0, pos+1);
+    log4cplus::tstring tPath = LOG4CPLUS_STRING_TO_TSTRING(newpath + "log4cplus.properties" );
+    std::wcout << "current config -> [" << tPath  << "]." << std::endl;
     return tPath;
 }
 
@@ -44,11 +48,17 @@ int main(int argc, char **argv)
     log4cplus::Initializer initializer;
     // log4cplus::initialize(); // 阻塞模式
 
+#ifdef __MINGW64__
+    std::experimental::filesystem::create_directory("log");
+else
     std::filesystem::create_directory("log");
-    PropertyConfigurator::doConfigure(getBinPath(argv[0]));
+#endif
+
+    log4cplus::PropertyConfigurator::doConfigure(getBinPath(argv[0]));
+    // log4cplus::PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT("log4cplus.properties"));
 
     // 开始使用
-    Logger logger = Logger::getRoot();
+    log4cplus::Logger logger = log4cplus::Logger::getRoot();
 
     // trace
     LOG4CPLUS_TRACE(logger, "trace and get the fingerprint: " << "random integer: " << random());
@@ -75,10 +85,9 @@ int main(int argc, char **argv)
     LOG4CPLUS_FATAL(logger, "This is a double: " << std::setprecision(15) << 1.2345234234);
 
     // log4cplus.logger.test
-    Logger loggerTest  = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("test"));
+    log4cplus::Logger loggerTest  = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("test"));
     LOG4CPLUS_TRACE(loggerTest,"anther logger,trace");
     LOG4CPLUS_ERROR(loggerTest,"anther logger,error ");
     log4cplus::Logger::shutdown();
     return 0;
 }
-

@@ -2,7 +2,7 @@
 # log4cplus 使用笔记
 
 
-## windows上编译
+## Window上使用MSVC编译
 
 设置编译环境
 
@@ -35,5 +35,14 @@
 ```
 
 
+## Window上使用mingw64编译
+### cmake 指定ninja编译
+```bash
+> cmd & mingw64 & code -n
+> mkdir build & cd build
+> cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=D:\devtools\log4cplus.mingw64.2.1.0
+> ninja
+> ninja install
+```
 
 ## Debian上编译
