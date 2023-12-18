@@ -25,6 +25,7 @@ void printMsgs() {
 
 int main() {
     log4cplus::Initializer initializer;
+    // log4cplus::initialize(); // 阻塞模式
     printMsgs();
 
     cout << "Turning on debug..." << endl;
