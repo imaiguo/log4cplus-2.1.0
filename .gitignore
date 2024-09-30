@@ -12,7 +12,6 @@ objdir*/
 Win32/
 x64/
 build/
-.vscode/
 
 docs/log4cplus-*/
 docs/webpage_docs-*/
@@ -64,3 +63,6 @@ docs/webpage_docs-*/
 
 *.ilk
 *.pdb
+log
+.vscode/settings.json
+.vscode/tasks.json

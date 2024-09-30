@@ -1,11 +1,11 @@
-﻿
 
-#include <iomanip>
-#include <iostream>
+#pragma comment(lib, "D:/devtools/log4cplus-2.1.0/lib/log4cplusUD.lib")
 
 #include <string>
+#include <iostream>
 #include <locale>
 #include <codecvt>
+#include <iomanip>
 
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/logger.h>
@@ -16,17 +16,33 @@
 #include <filesystem>
 #endif
 
-#include "Log4cplusInit.h"
+#include <log4cplus/Initializer.h>
+#include <log4cplus/configurator.h>
+#include <log4cplus/helpers/stringhelper.h>
+#include <log4cplus/helpers/loglog.h>
 
-int main(int argc, char **argv){
+bool Log4cplusInitFunc(std::string exepath){
 
-    //  初始化配置
-    Log4cplusInitFunc(argv[0]);
 #ifdef __MINGW64__
-    std::experimental::filesystem::create_directory("log");
-else
+     std::experimental::filesystem::create_directory("log");
+#else
     std::filesystem::create_directory("log");
 #endif
+
+    size_t pos = exepath.find_last_of("\\");
+    std::string newpath = exepath.substr(0, pos+1);
+    log4cplus::tstring tPath = LOG4CPLUS_STRING_TO_TSTRING(newpath + "config\\log4cplus.properties" );
+    std::wcout << "current config -> [" << tPath  << "]." << std::endl;
+
+    log4cplus::PropertyConfigurator::doConfigure(tPath);
+
+    return true;
+}
+
+int main(int argc, char **argv){
+    log4cplus::Initializer initializer;
+    // log4cplus::initialize(); //阻塞模式
+    Log4cplusInitFunc(argv[0]);
 
     // 开始使用
     log4cplus::Logger logger = log4cplus::Logger::getRoot();
@@ -49,7 +65,6 @@ else
     
     //fatal
     LOG4CPLUS_FATAL(logger, "oh, my god! the fatal error occur!!!!!!!!!");
-
 
     LOG4CPLUS_DEBUG(logger, "This is a bool: " << true);
     LOG4CPLUS_INFO(logger, "This is a char: " << 'x');
