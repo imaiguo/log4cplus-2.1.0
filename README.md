@@ -20,6 +20,7 @@
 > cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=D:\devtools\log4cplus-2.1.0
 > cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=D:\devtools\log4cplus-2.1.0
 > ninja
+> ninja -v # 打印详细编译过程
 > ninja install
 ```
 
@@ -53,6 +54,14 @@
 ```
 
 ## Debian上编译
+### cmake 指定ninja编译
+```bash
+> mkdir build & cd build
+> cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/devtools/log4cplus-2.1.0
+> cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/opt/devtools/log4cplus-2.1.0
+> ninja
+> ninja install
+```
 
 
 ## git清理ignore文件

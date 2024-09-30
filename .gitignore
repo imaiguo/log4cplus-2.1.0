@@ -57,6 +57,7 @@ docs/webpage_docs-*/
 *.lib
 
 # Executables
+*.bin
 *.exe
 *.out
 *.app
