@@ -11,9 +11,9 @@
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}.bin",
                 "-llog4cplus",
-                "-I/opt/devtools/log4cplus-2.1.0/include",
-                "-Wl,-rpath,/opt/devtools/log4cplus-2.1.0/lib",
-                "-L/opt/devtools/log4cplus-2.1.0/lib",
+                "-I/opt/DevTools/log4cplus.2.1.0/include",
+                "-Wl,-rpath,/opt/DevTools/log4cplus.2.1.0/lib",
+                "-L/opt/DevTools/log4cplus.2.1.0/lib",
                 "-std=c++17"          
             ],
             "options": {

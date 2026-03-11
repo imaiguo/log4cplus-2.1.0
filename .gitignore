@@ -65,5 +65,3 @@ docs/webpage_docs-*/
 *.ilk
 *.pdb
 log
-.vscode/settings.json
-.vscode/tasks.json

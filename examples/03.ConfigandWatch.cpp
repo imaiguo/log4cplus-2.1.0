@@ -1,4 +1,6 @@
 ﻿
+#pragma comment(lib, "D:/DevToolsMSVC/log4cplus.2.1.0/lib/log4cplusUD.lib")
+
 #include <log4cplus/logger.h>
 #include <log4cplus/configurator.h>
 #include <log4cplus/helpers/loglog.h>
@@ -52,7 +54,7 @@ log4cplus::tstring getPropertiesFileArgument (int argc, char * argv[]) {
         if (getFileInfo (&fi, file) == 0)
             return file;
     }
-    log4cplus::tstring tPath = to_wide_string( path + "log4cplus.properties" );
+    log4cplus::tstring tPath = to_wide_string( path + "config/log4cplus.properties" );
     wcout << "current config -> " << tPath <<endl;
     return tPath;
 }

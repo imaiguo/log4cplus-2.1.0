@@ -1,5 +1,5 @@
 
-#pragma comment(lib, "D:/devtools/log4cplus-2.1.0/lib/log4cplusUD.lib")
+#pragma comment(lib, "D:/DevToolsMSVC/log4cplus.2.1.0/lib/log4cplusUD.lib")
 
 #include <string>
 #include <iostream>
