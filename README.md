@@ -8,13 +8,23 @@
 ```bash
 >
 > mkdir build & cd build
+>
+> # 动态编译
 > cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=D:\DevToolsMSVC\log4cplus.2.1.0
 > cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=D:\DevToolsMSVC\log4cplus.2.1.0
+>
+> # 静态编译
+> cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=D:\DevToolsMSVC\log4cplus.2.1.0\static -DBUILD_SHARED_LIBS=OFF
+> cmake .. -G Ninja  -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=D:\DevToolsMSVC\log4cplus.2.1.0\static -DBUILD_SHARED_LIBS=OFF
+>
 > ninja
 > ninja -v # 打印详细编译过程
 > ninja install
 >
 ```
+
+# set(BUILD_SHARED_LIB OFF CACHE BOOL "Choose the type of build" FORCE)
+
 
 - cmake指定sln编译
 ```bash

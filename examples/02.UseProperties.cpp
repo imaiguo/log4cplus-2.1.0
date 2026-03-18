@@ -1,5 +1,22 @@
 
-#pragma comment(lib, "D:/DevToolsMSVC/log4cplus.2.1.0/lib/log4cplusUD.lib")
+#pragma comment(lib, "D:/DevToolsMSVC/log4cplus.2.1.0/static/lib/log4cplusSU.lib")
+
+// 静态链接log4plus库需要如下导入库
+#pragma comment(lib, "kernel32.lib")
+#pragma comment(lib, "user32.lib")
+#pragma comment(lib, "gdi32.lib")
+#pragma comment(lib, "winspool.lib")
+#pragma comment(lib, "comdlg32.lib")
+#pragma comment(lib, "advapi32.lib")
+#pragma comment(lib, "shell32.lib")
+#pragma comment(lib, "ole32.lib")
+#pragma comment(lib, "oleaut32.lib")
+#pragma comment(lib, "uuid.lib")
+#pragma comment(lib, "odbc32.lib")
+#pragma comment(lib, "odbccp32.lib")
+#pragma comment(lib, "ws2_32.lib")
+// #pragma comment(lib, "user32.lib")
+// kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ws2_32.lib
 
 #include <string>
 #include <iostream>
@@ -40,8 +57,8 @@ bool Log4cplusInitFunc(std::string exepath){
 }
 
 int main(int argc, char **argv){
-    log4cplus::Initializer initializer;
-    // log4cplus::initialize(); //阻塞模式
+    // log4cplus::Initializer initializer;
+    log4cplus::initialize(); //阻塞模式
     Log4cplusInitFunc(argv[0]);
 
     // 开始使用
